@@ -3,7 +3,7 @@ import os
 logpath = os.getcwd()
 client_id = '3N84K19TK0-100'
 secret_key = 'TQ14VZQ0RI'
-redirect_url = 'https://www.google.com/'
+redirect_url = 'https://trade.fyers.in/api-login/redirect-uri/index.html'
 response_type = ''
 grant_type = ''
 username = 'XH00748'
