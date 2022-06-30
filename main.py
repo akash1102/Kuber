@@ -1,8 +1,10 @@
 from asyncio.windows_events import NULL
 from Indicators.ema import EMA
 from Indicators.rsi import RSI
+from Indicators.vwap import VWAP
 from Indicators.sma import SMA
 from Indicators.supertrend import Supertrend
+from Indicators.vwap import VWAP
 from Operations.HistoricalDataGenerator import HistoricalDataGenerator
 from Operations.SignalGenerator import SignalGenerator
 from Operations.TokenGenerator import TokenGenrator
@@ -14,13 +16,14 @@ from os import path
 
 def main():
     access_token = TokenGenrator(kuberconstants.CLIENT_ID).save_accessToken()
-    startdate = datetime.date(2021,3,1)
+    startdate = datetime.date(2022,6,1)
     enddate = (startdate + datetime.timedelta(days= 99)).strftime("%Y-%m-%d")
     dataframe = HistoricalDataGenerator(access_token=access_token,logPath="/",symbol="NSE:SBIN-EQ",startDate=startdate,endDate=enddate,interval=5).historical_bydate()
 
     dataframe_high = dataframe['high']
     dataframe_low = dataframe['low']
     dataframe_close = dataframe['close']
+    dataframe_volume = dataframe['volume']
 
     supertrendObj = Supertrend(dataframe_high,dataframe_low,dataframe_close)
     for i in kuberconstants.SUPERTREND_MULTIPLIERS:

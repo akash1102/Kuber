@@ -5,4 +5,5 @@ class RSI:
     self.close = close
 
   def calculate_rsi(self,n):
-    return ta.ema(self.close,n)
+    return ta.rsi(self.close,n)
+    
