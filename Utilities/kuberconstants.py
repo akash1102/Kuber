@@ -19,13 +19,16 @@ LOGIN_SUBMIT = 'loginSubmit'
 VERIFY_PIN = 'verify-pin-page'
 VERIFY_PIN_SUBMIT = 'verifyPinSubmit'
 SMA_LENGTHS = [10,20,30,40,50]
-EMA_LENGTHS = [10,21,51,101,151,200]
+EMA_LENGTHS = [9,21,51,101,151,200]
 RSI_LENGTHS = [14,100]
 SUPERTREND_MULTIPLIERS = [1,2,3]
 SUPERTREND_PERIOD = 14
 BUY_EMA10_EMA20_RSI14 = 'BUY_EMA10_EMA20_RSI14'
 SELL_EMA10_EMA20_RSI14 = 'SELL_EMA10_EMA20_RSI14'
+VWAP = 'VWAP'
+PROFIT = 'PROFIT'
 RSI_30 = 30
 RSI_64 = 64
-
+'''
+'''
 GENERATE_AUTH_CODE_URL = f'https://api.fyers.in/api/v2/generate-authcode?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URL}&response_type=code&state=private'
