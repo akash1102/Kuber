@@ -3,6 +3,7 @@ import imp
 from symtable import Symbol
 from Indicators.ema import EMA
 from Indicators.rsi import RSI
+from Indicators.bollinger_band import BB
 from Indicators.Heikin_Ashi import Heikin_Ashi
 from Indicators.vwap import VWAP
 from Indicators.sma import SMA
@@ -25,7 +26,7 @@ def main():
     startdate = datetime.date(2022,1,1)
     enddate = (startdate + datetime.timedelta(days= 99)).strftime("%Y-%m-%d")
     enddate = datetime.date(2022,3,31)
-    dataframe = HistoricalDataGenerator(access_token=access_token,logPath="/",symbol="NSE:NIFTYBANK-INDEX",startDate=startdate,endDate=enddate,interval=5).historical_bydate()
+    dataframe = HistoricalDataGenerator(access_token=access_token,logPath="/",symbol="NSE:NIFTYBANK-INDEX",startDate=startdate,endDate=enddate,interval=3).historical_bydate()
     dataframe_high = dataframe['high']
     dataframe_low = dataframe['low']
     dataframe_close = dataframe['close']
@@ -47,6 +48,10 @@ def main():
     rsiObj = RSI(dataframe_close)
     for i in kuberconstants.RSI_LENGTHS:
         dataframe['RSI_'+str(i)] = rsiObj.calculate_rsi(i)
+
+    BBObj = BB(dataframe_close)
+    dataframe['BB_UP'] = BBObj.calculate_bbands(i)
+
 
     HAObj = Heikin_Ashi()
     dataframe = HAObj.calculate_Heikin_Ashi(dataframe)
