@@ -4,6 +4,7 @@ from symtable import Symbol
 from Indicators.bollinger_band import BollingerBands
 from Indicators.ema import EMA
 from Indicators.rsi import RSI
+from Indicators.bollinger_band import BB
 from Indicators.Heikin_Ashi import Heikin_Ashi
 from Indicators.vwap import VWAP
 from Indicators.sma import SMA
@@ -25,9 +26,17 @@ def main():
     #script = "NSE:NIFTY50" "NSE:NIFTYBANK-INDEX"
     # This is test
     access_token = TokenGenrator(kuberconstants.CLIENT_ID).save_accessToken()
+    startdate = datetime.date(2022,1,1)
+    enddate = (startdate + datetime.timedelta(days= 99)).strftime("%Y-%m-%d")
+    enddate = datetime.date(2022,3,31)
+    dataframe = HistoricalDataGenerator(access_token=access_token,logPath="/",symbol="NSE:NIFTYBANK-INDEX",startDate=startdate,endDate=enddate,interval=3).historical_bydate()
+    dataframe_high = dataframe['high']
+    dataframe_low = dataframe['low']
+    dataframe_close = dataframe['close']
+    dataframe_open =  dataframe['open']
+    dataframe_volume = dataframe['volume']
     startdate = date(2020,1,1)
-    enddate = (startdate + timedelta(days= 99)).strftime("%Y-%m-%d")
-    
+    enddate = (startdate + timedelta(days= 99)).strftime("%Y-%m-%d")    
     currentDay = datetime.now().day
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
@@ -76,7 +85,7 @@ def main():
         dataframe["TIME"] = dataframe.index
         signalGeneration = SignalGenerator(dataframe)
         dataframe = signalGeneration.GenerateSignal()
-
+        
         dataframe_main = dataframe_main.append(dataframe)
         delta = delta - 100 if delta > 100 else delta - delta
         if(delta == 0):

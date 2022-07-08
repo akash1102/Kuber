@@ -38,7 +38,10 @@ class SignalGenerator:
     self.dataframe[kuberconstants.RESONCODE] = ""
     self.dataframe[kuberconstants.PROFIT] = ""
     self.dataframe[kuberconstants.PL_POSITION] = ""
-    
+    self.dataframe[kuberconstants.BB_UP] = ""
+    self.dataframe[kuberconstants.BB_DOWN] = ""
+    self.dataframe[kuberconstants.BB_MEAN] = ""
+
     RSI_ARRAY = []
     print(self.dataframe.columns)
     for i in range(len(self.dataframe.index)):
